@@ -9,6 +9,8 @@
     "devDependencies": {
         "@commitlint/cli": "^18.4.3",
         "@commitlint/config-conventional": "^18.4.3",
+        "@types/react": "^18.2.46",
+        "@types/react-dom": "^18.2.18",
         "autoprefixer": "^10.4.16",
         "axios": "^1.6.1",
         "husky": "^8.0.3",
@@ -20,8 +22,11 @@
     "dependencies": {
         "@heroicons/react": "^2.1.1",
         "@inertiajs/react": "^1.0.14",
+        "@vitejs/plugin-react": "^4.2.1",
         "clsx": "^2.1.0",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.3.3"
     }
 }
