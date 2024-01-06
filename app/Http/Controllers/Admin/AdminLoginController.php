@@ -43,7 +43,9 @@ class AdminLoginController extends Controller implements ViewController
 
         $process_login = $this->adminuserservice->login($username, $password);
 
-        if ($process_login) return redirect('/admin/dashboard');
+        if ($process_login) {
+            return redirect('/admin/dashboard');
+        }
 
         return back()->withErrors([
             "user" => "invalid credentials"
