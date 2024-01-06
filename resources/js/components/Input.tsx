@@ -1,6 +1,11 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
-import React, { InputHTMLAttributes, useState } from "react";
+import React, {
+    ForwardedRef,
+    InputHTMLAttributes,
+    forwardRef,
+    useState,
+} from "react";
 
 const INPUT_SIZE = {
     xs: "text-sm h-10 rounded",
@@ -34,21 +39,24 @@ interface Props
     Icon?: React.ReactNode;
 }
 
-export default function Input({
-    size = "base",
-    state = "default",
-    variance = "default",
+function Input(
+    {
+        size = "base",
+        state = "default",
+        variance = "default",
 
-    divClass,
-    inputClass,
-    labelClass,
+        divClass,
+        inputClass,
+        labelClass,
 
-    Icon,
+        Icon,
 
-    type = "text",
+        type = "text",
 
-    ...props
-}: Props) {
+        ...props
+    }: Props,
+    ref: ForwardedRef<HTMLInputElement>
+) {
     const [initialType, setinitialType] = useState<typeof type>(type);
     function handlePasswordVisible() {
         if (type != "password") return;
@@ -74,6 +82,7 @@ export default function Input({
                     <div className="pl-2">{Icon}</div>
                 )}
                 <input
+                    ref={ref}
                     type={initialType}
                     placeholder="Input"
                     className={clsx(
@@ -110,3 +119,5 @@ export default function Input({
         </>
     );
 }
+
+export default forwardRef(Input);
