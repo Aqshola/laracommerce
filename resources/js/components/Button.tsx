@@ -37,7 +37,8 @@ const BUTTON_VARIANCE = {
         "border border-error text-error hover:backdrop-brightness-95",
 
     "text-neutral": "text-neutral hover:backdrop-brightness-0",
-    "text-primary": "text-primary hover:backdrop-brightness-0",
+    "text-primary":
+        "text-primary border  border-transparent hover:border-primary hover:shadow",
     "text-secondary": "text-secondary hover:backdrop-brightness-0",
     "text-warning": "text-warning hover:backdrop-brightness-0",
     "text-danger": "text-danger hover:backdrop-brightness-0",
@@ -47,6 +48,7 @@ interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "size"> {
     size?: keyof typeof BUTTON_SIZE;
     variance?: keyof typeof BUTTON_VARIANCE;
     weight?: keyof typeof BUTTON_WEIGHT;
+    icon?: React.ReactNode;
 }
 
 function Button(
@@ -56,6 +58,7 @@ function Button(
         size = "md",
         weight = "normal",
         variance = "outline-primary",
+        icon,
         ...props
     }: Props,
     ref: ForwardedRef<HTMLButtonElement>
@@ -67,11 +70,12 @@ function Button(
                     BUTTON_SIZE[size],
                     BUTTON_VARIANCE[variance],
                     BUTTON_WEIGHT[weight],
-                    "transition-all duration-400 font-roboto font-medium",
+                    "transition-all duration-400 font-roboto font-bold flex items-center",
                     className
                 )}
                 {...props}
             >
+                {!!icon && <div className="pr-2">{icon}</div>}
                 {children}
             </button>
         </>
