@@ -8,11 +8,9 @@ import React, {
 } from "react";
 
 const INPUT_SIZE = {
-    xs: "text-sm h-10 rounded",
-    sm: "text-base h-11 rounded-md",
-    base: "text-lg h-12 rounded-lg",
-    lg: "text-xl h-13 rounded-xl",
-    xl: "text-2xl h-14 rounded-2xl",
+    sm: "px-4 py-2 rounded-lg text-sm",
+    base: "px-4 py-3 rounded-lg text-sm",
+    lg: "px-4 py-[14px] text-base rounded-lg text-sm",
 };
 
 const INPUT_VARIANCE = {
@@ -79,16 +77,13 @@ function Input(
                 )}
             >
                 {Icon !== null && Icon !== undefined && (
-                    <div className="pl-2">{Icon}</div>
+                    <div className="pr-2">{Icon}</div>
                 )}
                 <input
                     ref={ref}
                     type={initialType}
                     placeholder="Input"
                     className={clsx(
-                        Icon !== null && Icon !== undefined && "py-3 px-2",
-                        (Icon === null || Icon === undefined) && "p-3",
-
                         "h-full w-full outline-none border-none ",
                         INPUT_STATE[state],
                         inputClass
@@ -97,12 +92,12 @@ function Input(
                 />
 
                 {type === "password" && (
-                    <button className="pr-2" onClick={handlePasswordVisible}>
+                    <button onClick={handlePasswordVisible}>
                         {initialType == "text" && (
-                            <EyeSlashIcon className="w-5 h-5" />
+                            <EyeSlashIcon className="w-4 h-4 fill-gray-500" />
                         )}
                         {initialType == "password" && (
-                            <EyeIcon className="w-5 h-5" />
+                            <EyeIcon className="w-4 h-4 fill-gray-500" />
                         )}
                     </button>
                 )}

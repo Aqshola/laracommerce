@@ -10,23 +10,35 @@ module.exports = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                roboto: ["Roboto", "sans-serif"],
+            },
             colors: {
-                custom: {
-                    "dark-green": "#2D7245",
-                    "navy-blue": "#00709B",
-                    "light-blue": "#16A4D1",
-                    black: "##1D1D35",
-                    white: "#F0F2E8",
-                    blue: "#4373c6",
-                    red: "#AD413D",
-                    green: "#14C469",
-                    grey: "#FAFAFA",
-                    "dark-grey": "#EFEFEF",
-                },
-                primary: "#14C469",
-                danger: "#AD413D",
-                secondary: "#4373c6",
-                warning: "#d89517",
+                primary: "#5a7c65",
+                "primary-focus": "#48604f",
+                "primary-content": "#ffffff",
+
+                secondary: "#ecf4e7",
+                "secondary-focus": "#cde2c1",
+                "secondary-content": "#24321a",
+
+                accent: "#f9e1e1",
+                "accent-focus": "#f4bebe",
+                "accent-content": "#322020",
+
+                neutral: "#5c5757",
+                "neutral-focus": "#272525",
+                "neutral-content": "#e9e7e7",
+
+                "base-100": "#e9e7e7",
+                "base-200": "#d1cccc",
+                "base-300": "#b9b1b1",
+                "base-content": "#100f0f",
+
+                info: "#1c92f2",
+                success: "#009485",
+                warning: "#ff9900",
+                error: "#ff5724",
             },
             padding: {
                 "custom-sm": "10px",

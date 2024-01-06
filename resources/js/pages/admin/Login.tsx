@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import { LockClosedIcon, UserCircleIcon } from "@heroicons/react/20/solid";
+import { LockClosedIcon, UserIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { router, usePage } from "@inertiajs/react";
 
@@ -20,33 +20,33 @@ export default function AdminLogin() {
     console.log(errors);
 
     return (
-        <div className="max-w-screen-2xl mx-auto h-screen p-5 flex justify-center bg-gray-50">
+        <div className="max-w-screen-2xl mx-auto h-screen p-5 flex justify-center bg-base-100">
             <form
                 className="mt-24 bg-white h-fit p-8 rounded flex flex-col"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 {errors.user != null && (
-                    <div className="text-sm bg-custom-red px-2 py-1 rounded text-white font-medium">
+                    <div className="text-sm bg-error px-3 py-2 rounded text-white font-medium mb-2 capitalize">
                         {errors.user}
                     </div>
                 )}
-                <h1 className="text-center text-3xl">Admin Login</h1>
+                <h1 className="text-center text-3xl font-roboto text-neutral font-medium">
+                    Admin Login
+                </h1>
                 <div className="flex flex-col mt-5 gap-4">
                     <Input
                         {...register("username")}
-                        Icon={
-                            <UserCircleIcon className="w-6 h-6 fill-gray-500 mt-0.5" />
-                        }
+                        Icon={<UserIcon className="w-4 h-4 fill-gray-500" />}
                         size="sm"
                         placeholder="Username"
                         id="username"
-                        inputClass="w-64"
+                        inputClass="w-72"
                         required
                     />
                     <Input
                         {...register("password")}
                         Icon={
-                            <LockClosedIcon className="w-5 h-5 fill-gray-500 mt-0.5" />
+                            <LockClosedIcon className="w-4 h-4 fill-gray-500" />
                         }
                         autoComplete=""
                         type="password"

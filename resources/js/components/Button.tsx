@@ -2,11 +2,11 @@ import clsx from "clsx";
 import React, { ButtonHTMLAttributes } from "react";
 
 const BUTTON_SIZE = {
-    xs: "py-2 px-4 text-xs rounded-sm",
-    sm: "py-custom-sm px-custom-sm-2 text-sm rounded-sm",
-    md: "py-3 px-6 text-base rounded-md",
-    lg: "py-custom-md px-custom-md-2 text-lg rounded-lg",
-    xl: "py-4 px-8 text-xl rounded-xl",
+    xs: "py-2 px-3 text-xs rounded-sm text-xs rounded-lg",
+    sm: "py-2 px-3 text-sm rounded-sm text-xs rounded-lg",
+    md: "py-[10px] px-5 text-sm rounded-lg",
+    lg: "py-3 px-5 text-base rounded-lg",
+    xl: "py-[14px] px-6 text-base rounded-lg",
 };
 
 const BUTTON_WEIGHT = {
@@ -16,25 +16,28 @@ const BUTTON_WEIGHT = {
 };
 
 const BUTTON_VARIANCE = {
-    "filled-primary":
-        "bg-primary text-white hover:bg-primary/70 hover:backdrop-brightness-0",
+    "filled-neutral": "bg-neutral hover:bg-neutral-focus text-neutral-content",
+    "filled-primary": "bg-primary hover:bg-primary-focus text-primary-content",
     "filled-secondary":
-        "bg-secondary text-white hover:bg-secondary/70 hover:backdrop-brightness-0",
+        "bg-secondary hover:bg-secondary-focus text-secondary-content",
     "filled-warning":
         "bg-warning text-white hover:bg-warning/70 hover:backdrop-brightness-0",
-    "filled-danger":
-        "bg-danger text-white hover:bg-warning/70 hover:backdrop-brightness-0",
+    "filled-error":
+        "bg-error text-white hover:bg-error/70 hover:backdrop-brightness-0",
 
+    "outline-neutral":
+        "border border-neutral text-neutral hover:backdrop-brightness-95",
     "outline-primary":
         "border border-primary text-primary hover:backdrop-brightness-95",
     "outline-secondary":
         "border border-secondary text-secondary hover:backdrop-brightness-95",
     "outline-warning":
         "border border-warning text-warning hover:backdrop-brightness-95",
-    "outline-danger":
-        "border border-danger text-danger hover:backdrop-brightness-95",
+    "outline-error":
+        "border border-error text-error hover:backdrop-brightness-95",
 
-    "text-primary": " text-primary hover:backdrop-brightness-0",
+    "text-neutral": "text-neutral hover:backdrop-brightness-0",
+    "text-primary": "text-primary hover:backdrop-brightness-0",
     "text-secondary": "text-secondary hover:backdrop-brightness-0",
     "text-warning": "text-warning hover:backdrop-brightness-0",
     "text-danger": "text-danger hover:backdrop-brightness-0",
@@ -61,7 +64,7 @@ export default function Button({
                     BUTTON_SIZE[size],
                     BUTTON_VARIANCE[variance],
                     BUTTON_WEIGHT[weight],
-                    "transition-all duration-400",
+                    "transition-all duration-400 font-roboto font-medium",
                     className
                 )}
                 {...props}
