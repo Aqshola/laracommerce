@@ -92,7 +92,7 @@ function Input(
                 />
 
                 {type === "password" && (
-                    <button onClick={handlePasswordVisible}>
+                    <button onClick={handlePasswordVisible} type="button">
                         {initialType == "text" && (
                             <EyeSlashIcon className="w-4 h-4 fill-gray-500" />
                         )}

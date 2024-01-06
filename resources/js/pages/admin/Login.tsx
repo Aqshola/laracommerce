@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { router, usePage } from "@inertiajs/react";
+import Alert from "@/components/Alert";
 
 type LoginRequest = {
     username: string;
@@ -12,12 +13,20 @@ type LoginRequest = {
 export default function AdminLogin() {
     const { errors } = usePage().props;
     const { register, handleSubmit } = useForm<LoginRequest>();
+    const [viewError, setviewError] = useState(false);
+
+    useEffect(() => {
+        if (errors.user) {
+            setviewError(true);
+        } else {
+            setviewError(false);
+        }
+    }, [errors]);
 
     async function onSubmit(data: LoginRequest) {
         router.post("/admin/login", data);
+        setviewError(false);
     }
-
-    console.log(errors);
 
     return (
         <div className="max-w-screen-2xl mx-auto h-screen p-5 flex justify-center bg-base-100">
@@ -25,14 +34,11 @@ export default function AdminLogin() {
                 className="mt-24 bg-white h-fit p-8 rounded flex flex-col"
                 onSubmit={handleSubmit(onSubmit)}
             >
-                {errors.user != null && (
-                    <div className="text-sm bg-error px-3 py-2 rounded text-white font-medium mb-2 capitalize">
-                        {errors.user}
-                    </div>
-                )}
                 <h1 className="text-center text-3xl font-roboto text-neutral font-medium">
                     Admin Login
                 </h1>
+                {viewError && <Alert className="mt-5">{errors.user}</Alert>}
+
                 <div className="flex flex-col mt-5 gap-4">
                     <Input
                         {...register("username")}
@@ -40,7 +46,7 @@ export default function AdminLogin() {
                         size="sm"
                         placeholder="Username"
                         id="username"
-                        inputClass="w-72"
+                        inputClass=" md:w-72"
                         required
                     />
                     <Input
@@ -53,7 +59,7 @@ export default function AdminLogin() {
                         size="sm"
                         placeholder="Password"
                         id="password"
-                        inputClass="w-64"
+                        inputClass="md:w-72"
                         divClass="w-full"
                         required
                     />

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, ForwardedRef, forwardRef } from "react";
 
 const BUTTON_SIZE = {
     xs: "py-2 px-3 text-xs rounded-sm text-xs rounded-lg",
@@ -49,14 +49,17 @@ interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "size"> {
     weight?: keyof typeof BUTTON_WEIGHT;
 }
 
-export default function Button({
-    children,
-    className,
-    size = "md",
-    weight = "normal",
-    variance = "outline-primary",
-    ...props
-}: Props) {
+function Button(
+    {
+        children,
+        className,
+        size = "md",
+        weight = "normal",
+        variance = "outline-primary",
+        ...props
+    }: Props,
+    ref: ForwardedRef<HTMLButtonElement>
+) {
     return (
         <>
             <button
@@ -74,3 +77,5 @@ export default function Button({
         </>
     );
 }
+
+export default forwardRef(Button);
