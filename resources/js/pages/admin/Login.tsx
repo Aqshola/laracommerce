@@ -23,7 +23,7 @@ export default function AdminLogin() {
         }
     }, [errors]);
 
-    async function onSubmit(data: LoginRequest) {
+    async function _handleLogin(data: LoginRequest) {
         router.post("/admin/login", data);
         setviewError(false);
     }
@@ -32,7 +32,7 @@ export default function AdminLogin() {
         <div className="max-w-screen-2xl mx-auto h-screen p-5 flex justify-center bg-base-100">
             <form
                 className="mt-24 bg-white h-fit p-8 rounded flex flex-col"
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(_handleLogin)}
             >
                 <h1 className="text-center text-3xl font-roboto text-neutral font-medium">
                     Admin Login

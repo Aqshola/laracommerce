@@ -3,14 +3,71 @@ import Button from "@/components/Button";
 import {
     ArrowLeftStartOnRectangleIcon,
     Cog6ToothIcon,
+    CreditCardIcon,
     FolderIcon,
     HomeIcon,
     RectangleGroupIcon,
     TagIcon,
     UserGroupIcon,
 } from "@heroicons/react/24/outline";
+import {
+    HomeIcon as HomeIconActive,
+    FolderIcon as FolderIconActive,
+    RectangleGroupIcon as RectangleGroupIconActive,
+    TagIcon as TagIconActive,
+    CreditCardIcon as CreditCardIconActive,
+} from "@heroicons/react/24/solid";
+import { router, usePage, Link } from "@inertiajs/react";
+import clsx from "clsx";
 
 export default function SideNav() {
+    const { url } = usePage();
+    const activeUrl = url.trim().split("/admin/")[1] || "";
+
+    const MAIN_MENU = [
+        {
+            label: "Dashboard",
+            iconInitial: HomeIcon,
+            IconActive: HomeIconActive,
+            callback: () => {},
+            url: "dashboard",
+        },
+
+        {
+            label: "Product",
+            iconInitial: FolderIcon,
+            IconActive: FolderIconActive,
+            callback: () => {},
+            url: "product",
+        },
+        {
+            label: "Tag Product",
+            iconInitial: RectangleGroupIcon,
+            IconActive: RectangleGroupIconActive,
+            callback: () => {},
+            url: "tag",
+        },
+
+        {
+            label: "Discount",
+            iconInitial: TagIcon,
+            IconActive: TagIconActive,
+            callback: () => {},
+            url: "discount",
+        },
+
+        {
+            label: "Payment",
+            iconInitial: CreditCardIcon,
+            IconActive: CreditCardIconActive,
+            callback: () => {},
+            url: "payment",
+        },
+    ];
+
+    function _handleLogout() {
+        router.post("/admin/logout");
+    }
     return (
         <>
             <div className="flex flex-col min-h-screen h-full bg-[#FDFDFD] px-5 min-w-56 py-4 border-r-2 border">
@@ -25,38 +82,24 @@ export default function SideNav() {
                     </span>
                 </div>
                 <div className="flex flex-col mt-6 gap-2">
-                    <Button
-                        size="xs"
-                        variance="text-primary"
-                        className="font-bold "
-                        icon={<HomeIcon className="h-4 w-4" />}
-                    >
-                        Dashboard
-                    </Button>
-                    <Button
-                        size="xs"
-                        variance="text-primary"
-                        className="font-bold "
-                        icon={<FolderIcon className="h-4 w-4" />}
-                    >
-                        Product
-                    </Button>
-                    <Button
-                        size="xs"
-                        variance="text-primary"
-                        className="font-bold "
-                        icon={<RectangleGroupIcon className="h-4 w-4" />}
-                    >
-                        Tag Product
-                    </Button>
-                    <Button
-                        size="xs"
-                        variance="text-primary"
-                        className="font-bold "
-                        icon={<TagIcon className="h-4 w-4" />}
-                    >
-                        Discount
-                    </Button>
+                    {MAIN_MENU.map((menu) => (
+                        <Button
+                            size="xs"
+                            variance="text-primary"
+                            className={clsx(
+                                menu.url == activeUrl && "font-semibold"
+                            )}
+                            icon={
+                                menu.url == activeUrl ? (
+                                    <menu.IconActive className="h-4 w-4" />
+                                ) : (
+                                    <menu.iconInitial className="h-4 w-4" />
+                                )
+                            }
+                        >
+                            {menu.label}
+                        </Button>
+                    ))}
                 </div>
                 <div className="mt-auto flex flex-col gap-2">
                     <Button
@@ -76,6 +119,7 @@ export default function SideNav() {
                         Settings
                     </Button>
                     <Button
+                        onClick={_handleLogout}
                         size="xs"
                         variance="text-primary"
                         className="font-bold "

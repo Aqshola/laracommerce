@@ -39,8 +39,6 @@ class AdminLoginController extends Controller implements ViewController
             ]);
         }
 
-
-
         $process_login = $this->adminuserservice->login($username, $password);
 
         if ($process_login) {
@@ -50,5 +48,11 @@ class AdminLoginController extends Controller implements ViewController
         return back()->withErrors([
             "user" => "invalid credentials"
         ]);
+    }
+
+    public function logout(): Response|RedirectResponse
+    {
+        $this->adminuserservice->logout();
+        return redirect('/admin/login');
     }
 }

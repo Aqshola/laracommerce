@@ -15,5 +15,7 @@ Route::prefix("admin")->group(function () {
         ->middleware([AdminRedirector::class])
         ->name('view-dashboard-admin');
 
+
     Route::post('/login', [AdminLoginController::class, 'login'])->name('post-login-admin');
+    Route::post('/logout', [AdminLoginController::class, 'logout'])->name('post-logout-admin');
 });

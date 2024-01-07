@@ -71,12 +71,15 @@ function Button(
                     BUTTON_VARIANCE[variance],
                     BUTTON_WEIGHT[weight],
                     "transition-all duration-400 font-roboto font-bold flex items-center",
+
                     className
                 )}
                 {...props}
             >
                 {!!icon && <div className="pr-2">{icon}</div>}
-                {children}
+                <span className={clsx(!!icon && "text-left", "w-full")}>
+                    {children}
+                </span>
             </button>
         </>
     );

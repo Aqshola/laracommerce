@@ -20,4 +20,9 @@ class AdminUserService implements UserService
         Session::put('admin_id', $user->user_id);
         return true;
     }
+
+    public function logout()
+    {
+        Session::remove('admin_id');
+    }
 }
