@@ -9,7 +9,7 @@ export default function AdminContainer({ children }: Props) {
             <div>
                 <SideNav />
             </div>
-            <div className="px-10 py-4">{children}</div>
+            <div className="px-10 py-10 w-full">{children}</div>
         </div>
     );
 }

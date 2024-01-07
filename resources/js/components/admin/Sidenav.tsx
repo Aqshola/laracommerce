@@ -31,6 +31,7 @@ export default function SideNav() {
             IconActive: HomeIconActive,
             callback: () => {},
             url: "dashboard",
+            type: "link",
         },
 
         {
@@ -39,6 +40,7 @@ export default function SideNav() {
             IconActive: FolderIconActive,
             callback: () => {},
             url: "product",
+            type: "link",
         },
         {
             label: "Tag Product",
@@ -46,6 +48,7 @@ export default function SideNav() {
             IconActive: RectangleGroupIconActive,
             callback: () => {},
             url: "tag",
+            type: "link",
         },
 
         {
@@ -54,6 +57,7 @@ export default function SideNav() {
             IconActive: TagIconActive,
             callback: () => {},
             url: "discount",
+            type: "link",
         },
 
         {
@@ -62,11 +66,24 @@ export default function SideNav() {
             IconActive: CreditCardIconActive,
             callback: () => {},
             url: "payment",
+            type: "link",
         },
     ];
 
     function _handleLogout() {
         router.post("/admin/logout");
+    }
+
+    function _conditionalWrappingLink(
+        wrap: boolean,
+        element: React.ReactNode,
+        href: string
+    ) {
+        if (wrap) {
+            return <Link href={`/admin/${href}`}>{element}</Link>;
+        }
+
+        return element;
     }
     return (
         <>
@@ -82,24 +99,28 @@ export default function SideNav() {
                     </span>
                 </div>
                 <div className="flex flex-col mt-6 gap-2">
-                    {MAIN_MENU.map((menu) => (
-                        <Button
-                            size="xs"
-                            variance="text-primary"
-                            className={clsx(
-                                menu.url == activeUrl && "font-semibold"
-                            )}
-                            icon={
-                                menu.url == activeUrl ? (
-                                    <menu.IconActive className="h-4 w-4" />
-                                ) : (
-                                    <menu.iconInitial className="h-4 w-4" />
-                                )
-                            }
-                        >
-                            {menu.label}
-                        </Button>
-                    ))}
+                    {MAIN_MENU.map((menu) =>
+                        _conditionalWrappingLink(
+                            menu.type === "link",
+                            <Button
+                                size="xs"
+                                variance="text-primary"
+                                className={clsx(
+                                    menu.url == activeUrl && "font-semibold"
+                                )}
+                                icon={
+                                    menu.url == activeUrl ? (
+                                        <menu.IconActive className="h-4 w-4" />
+                                    ) : (
+                                        <menu.iconInitial className="h-4 w-4" />
+                                    )
+                                }
+                            >
+                                {menu.label}
+                            </Button>,
+                            menu.url
+                        )
+                    )}
                 </div>
                 <div className="mt-auto flex flex-col gap-2">
                     <Button
