@@ -1,6 +1,8 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import AdminContainer from "@/components/admin/AdminContainer";
+import BuildedTable from "@/components/table/BuildedTable";
+import { formatNumberPrice } from "@/utils/formatter";
 import {
     ChevronDownIcon,
     ChevronUpIcon,
@@ -11,6 +13,51 @@ import {
 import React from "react";
 
 export default function Product() {
+    const COLUMN_LIST = [
+        {
+            increment: true,
+            label: "No",
+            value: "no",
+            sort: false,
+            key: "no",
+        },
+        {
+            label: "Name",
+            value: "name",
+            key: "name",
+        },
+        {
+            label: "Price",
+            value: "price",
+            key: "price",
+            formatting: formatNumberPrice,
+        },
+        {
+            label: "Variant",
+            value: "variant",
+            key: "variant",
+        },
+        {
+            label: "Discount",
+            value: "discount",
+            key: "discount",
+        },
+        {
+            label: "Action",
+            value: "action",
+            key: "action",
+        },
+    ];
+
+    const ROW_LIST = [
+        {
+            name: "Tanaman Hias",
+            price: 120000,
+            variant: "",
+            discount: "",
+            action: "",
+        },
+    ];
     return (
         <AdminContainer>
             <div className="flex w-full ">
@@ -59,100 +106,7 @@ export default function Product() {
             {/* SECTION TABLE */}
 
             <div className="w-full mt-4">
-                <table className="w-full rounded overflow-hidden">
-                    <thead className="bg-base-100  text-base-content font-roboto border">
-                        <tr>
-                            <th className="font-normal   text-sm px-3 py-2 text-left">
-                                No
-                            </th>
-                            <th className="font-normal   text-sm px-3 py-2 text-left flex gap-2 items-center">
-                                <span>Name</span>
-                                <div className="flex flex-col">
-                                    <ChevronUpIcon className="w-2 h-2" />
-                                    <ChevronDownIcon className="w-2 h-2" />
-                                </div>
-                            </th>
-                            <th className="font-normal   text-sm px-3 py-2 text-left">
-                                Price
-                            </th>
-                            <th className="font-normal   text-sm px-3 py-2 text-left">
-                                Variant
-                            </th>
-                            <th className="font-normal   text-sm px-3 py-2 text-left">
-                                Discount
-                            </th>
-                            <th className="font-normal   text-sm px-3 py-2 text-left">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody className="border font-roboto">
-                        <tr className="border">
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                1
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                Tanaman Hias
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                Rp. 85,000.00
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left flex gap-2">
-                                <div className="w-fit p-1 text-xs rounded border border-neutral text-neutral">
-                                    Merah
-                                </div>
-                                <div className="w-fit p-1 text-xs rounded border border-neutral text-neutral">
-                                    Hitam
-                                </div>
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left ">
-                                -
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                <Button
-                                    size="xs"
-                                    icon={
-                                        <PencilSquareIcon className="w-4 h-4" />
-                                    }
-                                >
-                                    Open
-                                </Button>
-                            </th>
-                        </tr>
-                        <tr className="border">
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                1
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                Tanaman Hias
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                Rp. 85,000.00
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left flex gap-2">
-                                <div className="w-fit p-1 text-xs rounded border border-neutral text-neutral">
-                                    Merah
-                                </div>
-                                <div className="w-fit p-1 text-xs rounded border border-neutral text-neutral">
-                                    Hitam
-                                </div>
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left ">
-                                -
-                            </th>
-                            <th className="font-normal  text-xs px-3 py-2 text-left">
-                                <Button
-                                    size="xs"
-                                    icon={
-                                        <PencilSquareIcon className="w-4 h-4" />
-                                    }
-                                >
-                                    Open
-                                </Button>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
+                <BuildedTable columnList={COLUMN_LIST} rowList={ROW_LIST} />
             </div>
         </AdminContainer>
     );
