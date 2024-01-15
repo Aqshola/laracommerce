@@ -22,7 +22,7 @@ import clsx from "clsx";
 
 export default function SideNav() {
     const { url } = usePage();
-    const activeUrl = url.trim().split("/admin/")[1] || "";
+    const activeUrl = url.trim().split("/")[2] || "";
 
     const MAIN_MENU = [
         {
@@ -87,7 +87,7 @@ export default function SideNav() {
     }
     return (
         <>
-            <div className="flex flex-col min-h-screen h-full bg-[#FDFDFD] px-5 min-w-56 py-4 border-r-2 border">
+            <div className="flex flex-col min-h-screen h-full bg-[#FDFDFD] px-5 min-w-56 py-4 border-r-1 border">
                 <div className="px-3 flex items-center ">
                     <div className="pr-2 ">
                         <div className=" bg-primary text-white font-medium rounded w-4 h-4 text-xs flex items-center justify-center">

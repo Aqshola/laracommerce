@@ -10,6 +10,7 @@ import {
     PencilSquareIcon,
     PlusIcon,
 } from "@heroicons/react/24/solid";
+import { Link } from "@inertiajs/react";
 import React from "react";
 
 export default function Product() {
@@ -64,13 +65,15 @@ export default function Product() {
                 <h1 className="text-2xl font-medium text-neutral font-roboto flex-grow">
                     Product
                 </h1>
-                <Button
-                    size="sm"
-                    icon={<PlusIcon className="w-4 h-4" />}
-                    variance="filled-primary"
-                >
-                    Add Product
-                </Button>
+                <Link href="/admin/product/add">
+                    <Button
+                        size="sm"
+                        icon={<PlusIcon className="w-4 h-4" />}
+                        variance="filled-primary"
+                    >
+                        Add Product
+                    </Button>
+                </Link>
             </div>
 
             <div className="mt-5 w-full border p-3 rounded-lg flex flex-col">

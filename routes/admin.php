@@ -16,9 +16,15 @@ Route::prefix("admin")->group(function () {
         ->middleware([AdminRedirector::class])
         ->name('view-dashboard-admin');
 
+
+
     Route::get('/product', [AdminProductController::class, 'render'])
         ->middleware([AdminRedirector::class])
         ->name('view-product-admin');
+
+    Route::get('/product/add', [AdminProductController::class, 'renderFormInput'])
+        ->middleware([AdminRedirector::class])
+        ->name('view-product-add-admin');
 
 
     Route::post('/login', [AdminLoginController::class, 'login'])->name('post-login-admin');
