@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "@/components/table/Table";
+import Table from "@/components/base/table/Table";
 
 type ColumnTable = {
     increment?: boolean;

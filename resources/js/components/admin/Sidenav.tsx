@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@/components/Button";
+import Button from "@/components/base/button/Button";
 import {
     ArrowLeftStartOnRectangleIcon,
     Cog6ToothIcon,
@@ -77,10 +77,15 @@ export default function SideNav() {
     function _conditionalWrappingLink(
         wrap: boolean,
         element: React.ReactNode,
-        href: string
+        href: string,
+        key: any
     ) {
         if (wrap) {
-            return <Link href={`/admin/${href}`}>{element}</Link>;
+            return (
+                <Link key={key} href={`/admin/${href}`}>
+                    {element}
+                </Link>
+            );
         }
 
         return element;
@@ -103,6 +108,7 @@ export default function SideNav() {
                         _conditionalWrappingLink(
                             menu.type === "link",
                             <Button
+                                key={menu.label}
                                 size="xs"
                                 variance="text-primary"
                                 className={clsx(
@@ -118,7 +124,8 @@ export default function SideNav() {
                             >
                                 {menu.label}
                             </Button>,
-                            menu.url
+                            menu.url,
+                            menu.label
                         )
                     )}
                 </div>

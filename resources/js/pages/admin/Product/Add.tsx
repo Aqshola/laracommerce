@@ -1,6 +1,6 @@
-import Button from "@/components/Button";
-import Input from "@/components/Input";
-import TextArea from "@/components/TextArea";
+import Button from "@/components/base/button/Button";
+import Input from "@/components/base/input/Input";
+import TextArea from "@/components/base/input/TextArea";
 import AdminContainer from "@/components/admin/AdminContainer";
 import {
     ChevronLeftIcon,
@@ -8,6 +8,7 @@ import {
     TrashIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
+import NumberInput from "@/components/base/input/NumberInput";
 
 export default function AddProduct() {
     return (
@@ -29,8 +30,8 @@ export default function AddProduct() {
                     </h1>
                 </div>
 
-                <div className="grid grid-cols-12 gap-5 px-6">
-                    <div className="grid grid-cols-12 col-span-6 gap-5">
+                <div className="grid grid-cols-12 gap-10 px-6">
+                    <div className="grid grid-cols-12 col-span-6 gap-4">
                         <div className="flex flex-col col-span-12 gap-2">
                             <h2 className="text-lg font-medium text-neutral">
                                 Product Information
@@ -38,25 +39,25 @@ export default function AddProduct() {
                         </div>
                         <div className="flex flex-col col-span-6 gap-2">
                             <label htmlFor="name">Name</label>
-                            <Input placeholder="Name" />
+                            <Input placeholder="Name" size="sm" />
                         </div>
-                        <div className="flex flex-col col-span-6 gap-2"></div>
-                        <div className="flex items-center col-span-6 gap-2">
+                        <br />
+                        <div className="flex items-center col-span-6 gap-2 ">
                             <input type="checkbox" /> Have Variant
                         </div>
-                        <div className="flex flex-col col-span-6 gap-2"></div>
+                        <br />
                         <div className="flex flex-col col-span-6 gap-2">
                             <label htmlFor="price">Price</label>
-                            <Input placeholder="Price" />
+                            <NumberInput placeholder="Price" size="sm" />
                         </div>
-                        <div className="flex flex-col col-span-6 gap-2"></div>
+                        <br />
                         <div className="flex flex-col col-span-6 gap-2">
                             <label htmlFor="stock">Stock</label>
-                            <Input placeholder="Stock" />
+                            <NumberInput placeholder="Stock" size="sm" />
                         </div>
                         <div className="flex flex-col col-span-12 gap-2">
                             <label htmlFor="name">Description</label>
-                            <TextArea rows={5} />
+                            <TextArea rows={5} size="sm" />
                         </div>
                     </div>
                     <div className="grid grid-cols-12 col-span-6 gap-5 h-fit">

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
+import Button from "@/components/base/button/Button";
+import Input from "@/components/base/input/Input";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { router, usePage } from "@inertiajs/react";
-import Alert from "@/components/Alert";
+import Alert from "@/components/base/alert/Alert";
 
 type LoginRequest = {
     username: string;

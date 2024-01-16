@@ -1,7 +1,7 @@
-import Button from "@/components/Button";
-import Input from "@/components/Input";
+import Button from "@/components/base/button/Button";
+import Input from "@/components/base/input/Input";
 import AdminContainer from "@/components/admin/AdminContainer";
-import BuildedTable from "@/components/table/BuildedTable";
+import BuildedTable from "@/components/base/table/BuildedTable";
 import { formatNumberPrice } from "@/utils/formatter";
 import {
     ChevronDownIcon,
