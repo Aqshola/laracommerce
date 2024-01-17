@@ -32,7 +32,7 @@ export default function BuildedTable({ columnList, rowList }: Props) {
             </Table.Thead>
             <Table.Tbody>
                 {rowList.map((row, idx) => (
-                    <Table.Tr>
+                    <Table.Tr key={idx}>
                         {columnList.map((column) => (
                             <Table.Td>
                                 {column.increment && <>{idx + 1}</>}

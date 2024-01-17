@@ -5,12 +5,51 @@ import AdminContainer from "@/components/admin/AdminContainer";
 import {
     ChevronLeftIcon,
     DocumentPlusIcon,
+    PencilIcon,
     TrashIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import NumberInput from "@/components/base/input/NumberInput";
+import { ChangeEvent, useRef, useState } from "react";
+import { allowedTypePhotoUpload } from "@/utils/constant";
+import {
+    fileImageUploadUrlExtractor,
+    fileUploadExtractor,
+} from "@/utils/helper";
 
 export default function AddProduct() {
+    const [isHaveVariant, setisHaveVariant] = useState(false);
+    const [productPhotoList, setproductPhotoList] = useState<File[]>([]);
+
+    const refProductFile = useRef<HTMLInputElement | null>(null);
+
+    function _handleVariant(el: ChangeEvent<HTMLInputElement>) {
+        setisHaveVariant(el.target.checked);
+    }
+
+    function _handleOpenUploadProductFile() {
+        if (!refProductFile) return;
+
+        refProductFile.current?.click();
+    }
+
+    function _handleUploadProductFile(el: React.ChangeEvent<HTMLInputElement>) {
+        const listFile = el.target.files;
+        console.log(listFile);
+
+        const extractedFile = fileUploadExtractor(listFile);
+
+        setproductPhotoList([...productPhotoList, ...extractedFile]);
+        el.target.value = ""; //reset
+    }
+
+    function _handleDeleteProductPhoto(selectedIdx: number) {
+        const deletedPhotoList = productPhotoList.filter(
+            (_, idx) => idx != selectedIdx
+        );
+
+        setproductPhotoList(deletedPhotoList);
+    }
     return (
         <>
             <AdminContainer>
@@ -31,43 +70,64 @@ export default function AddProduct() {
                 </div>
 
                 <div className="grid grid-cols-12 gap-10 px-6">
-                    <div className="grid grid-cols-12 col-span-6 gap-4">
-                        <div className="flex flex-col col-span-12 gap-2">
+                    <div className="grid grid-cols-12 col-span-6 gap-4 h-fit">
+                        <div className="flex flex-col col-span-12 gap-2 h-fit">
                             <h2 className="text-lg font-medium text-neutral">
                                 Product Information
                             </h2>
                         </div>
-                        <div className="flex flex-col col-span-6 gap-2">
+                        <div className="flex flex-col col-span-6 gap-2 h-fit ">
                             <label htmlFor="name">Name</label>
                             <Input placeholder="Name" size="sm" />
                         </div>
                         <br />
-                        <div className="flex items-center col-span-6 gap-2 ">
-                            <input type="checkbox" /> Have Variant
+                        <div className="flex items-center col-span-6 gap-2 h-fit">
+                            <input type="checkbox" onChange={_handleVariant} />{" "}
+                            Have Variant
                         </div>
                         <br />
-                        <div className="flex flex-col col-span-6 gap-2">
-                            <label htmlFor="price">Price</label>
-                            <NumberInput placeholder="Price" size="sm" />
-                        </div>
-                        <br />
-                        <div className="flex flex-col col-span-6 gap-2">
-                            <label htmlFor="stock">Stock</label>
-                            <NumberInput placeholder="Stock" size="sm" />
-                        </div>
-                        <div className="flex flex-col col-span-12 gap-2">
-                            <label htmlFor="name">Description</label>
-                            <TextArea rows={5} size="sm" />
-                        </div>
+
+                        {!isHaveVariant && (
+                            <>
+                                <div className="flex flex-col col-span-6 gap-2">
+                                    <label htmlFor="price">Price</label>
+                                    <NumberInput
+                                        placeholder="Price"
+                                        size="sm"
+                                    />
+                                </div>
+                                <br />
+                                <div className="flex flex-col col-span-6 gap-2">
+                                    <label htmlFor="stock">Stock</label>
+                                    <NumberInput
+                                        placeholder="Stock"
+                                        size="sm"
+                                    />
+                                </div>
+                                <div className="flex flex-col col-span-12 gap-2">
+                                    <label htmlFor="name">Description</label>
+                                    <TextArea rows={5} size="sm" />
+                                </div>
+                            </>
+                        )}
                     </div>
-                    <div className="grid grid-cols-12 col-span-6 gap-5 h-fit">
+                    <div className="grid grid-cols-12 col-span-6 gap-5 h-max">
                         <div className="flex flex-col col-span-12 gap-2 h-fit">
                             <h2 className="text-lg font-medium text-neutral">
                                 Product Display
                             </h2>
                         </div>
                         <div className="flex flex-col col-span-6 gap-2">
+                            <input
+                                type="file"
+                                ref={refProductFile}
+                                className="hidden"
+                                onInput={_handleUploadProductFile}
+                                multiple
+                                accept={allowedTypePhotoUpload.join(", ")} //accept type in constant
+                            />
                             <Button
+                                onClick={_handleOpenUploadProductFile}
                                 size="sm"
                                 variance="filled-neutral"
                                 className="w-fit"
@@ -75,17 +135,36 @@ export default function AddProduct() {
                                 Add Display
                             </Button>
                         </div>
-                        <div className="col-span-12">
-                            <h3>Asset</h3>
-                        </div>
-
-                        <div className="flex col-span-12 gap-2">
-                            <div className="bg-red-400 w-56 h-56"></div>
-                            <div className="bg-red-400 w-56 h-56"></div>
+                        <div className="flex col-span-12 gap-2 flex-wrap">
+                            {productPhotoList.map((file, idx) => (
+                                <div
+                                    className="bg-red-400 w-44 h-44 rounded flex overflow-hidden relative"
+                                    key={file.name + idx}
+                                >
+                                    <div className="flex absolute right-0 p-0.5 gap-1">
+                                        {/* <button className="w-fit  border rounded-full bg-white p-0.5 right-1 mt-1">
+                                            <PencilIcon className="w-4 h-4" />
+                                        </button> */}
+                                        <button
+                                            className="w-fit  border rounded-full bg-white p-0.5 right-1 mt-1"
+                                            onClick={() =>
+                                                _handleDeleteProductPhoto(idx)
+                                            }
+                                        >
+                                            <TrashIcon className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                    <img
+                                        className="w-full h-full object-cover flex"
+                                        src={fileImageUploadUrlExtractor(file)}
+                                        alt={file.name}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-                <div className="mt-20 px-6">
+                {/* <div className="mt-20 px-6">
                     <h2 className="text-lg font-medium text-neutral">
                         Product Variant
                     </h2>
@@ -118,7 +197,7 @@ export default function AddProduct() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="mt-10 flex gap-5 px-6">
                     <Button>Draft</Button>
                     <Button variance="filled-primary">Submit</Button>
