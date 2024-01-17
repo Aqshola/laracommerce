@@ -20,6 +20,9 @@ import {
 export default function AddProduct() {
     const [isHaveVariant, setisHaveVariant] = useState(false);
     const [productPhotoList, setproductPhotoList] = useState<File[]>([]);
+    const [variantCount, setvariantCount] = useState(0);
+
+    const dummyArrayForRender = Array.from({ length: variantCount });
 
     const refProductFile = useRef<HTMLInputElement | null>(null);
 
@@ -35,10 +38,7 @@ export default function AddProduct() {
 
     function _handleUploadProductFile(el: React.ChangeEvent<HTMLInputElement>) {
         const listFile = el.target.files;
-        console.log(listFile);
-
         const extractedFile = fileUploadExtractor(listFile);
-
         setproductPhotoList([...productPhotoList, ...extractedFile]);
         el.target.value = ""; //reset
     }
@@ -49,6 +49,10 @@ export default function AddProduct() {
         );
 
         setproductPhotoList(deletedPhotoList);
+    }
+
+    function _addVariant() {
+        setvariantCount(variantCount + 1);
     }
     return (
         <>
@@ -129,10 +133,9 @@ export default function AddProduct() {
                             <Button
                                 onClick={_handleOpenUploadProductFile}
                                 size="sm"
-                                variance="filled-neutral"
                                 className="w-fit"
                             >
-                                Add Display
+                                Add Photo
                             </Button>
                         </div>
                         <div className="flex col-span-12 gap-2 flex-wrap">
@@ -142,9 +145,6 @@ export default function AddProduct() {
                                     key={file.name + idx}
                                 >
                                     <div className="flex absolute right-0 p-0.5 gap-1">
-                                        {/* <button className="w-fit  border rounded-full bg-white p-0.5 right-1 mt-1">
-                                            <PencilIcon className="w-4 h-4" />
-                                        </button> */}
                                         <button
                                             className="w-fit  border rounded-full bg-white p-0.5 right-1 mt-1"
                                             onClick={() =>
@@ -164,40 +164,70 @@ export default function AddProduct() {
                         </div>
                     </div>
                 </div>
-                {/* <div className="mt-20 px-6">
-                    <h2 className="text-lg font-medium text-neutral">
-                        Product Variant
-                    </h2>
-                    <div className="grid grid-cols-12 mt-5">
-                        <div className="col-span-4  border p-5 rounded-lg">
-                            <div className="flex justify-end items-center gap-5">
-                                <div className="text-xs border rounded-full px-2  text-neutral border-neutral">
-                                    Default
-                                </div>
-                                <div>
-                                    <TrashIcon className="h-5 w-5 text-neutral" />
-                                </div>
-                            </div>
-                            <div className="flex gap-5  items-center h-full border-red-500">
-                                <div className="h-full w-44 flex mb-5 bg-red-100 rounded-lg box-border"></div>
-                                <div className="flex flex-col gap-3">
-                                    <div>
-                                        <label htmlFor="name">Name</label>
-                                        <Input size="sm" placeholder="Name" />
+
+                {isHaveVariant && (
+                    <div className="mt-20 px-6">
+                        <h2 className="text-lg font-medium text-neutral">
+                            Product Variant
+                        </h2>
+                        <Button
+                            size="xs"
+                            className="mt-2"
+                            onClick={_addVariant}
+                        >
+                            Add Variant
+                        </Button>
+                        <div className="grid grid-cols-12 mt-5 gap-5">
+                            {dummyArrayForRender.map((_, idx) => (
+                                <div
+                                    className="col-span-4  border p-5 rounded-lg"
+                                    key={idx}
+                                >
+                                    <div className="flex justify-end items-center gap-5">
+                                        <div className="text-xs border rounded-full px-2  text-neutral border-neutral">
+                                            Default
+                                        </div>
+                                        <div>
+                                            <TrashIcon className="h-5 w-5 text-neutral" />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <label htmlFor="stock">Stock</label>
-                                        <Input size="sm" placeholder="Stock" />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="price">Price</label>
-                                        <Input size="sm" placeholder="Price" />
+                                    <div className="flex gap-5  items-center h-full border-red-500">
+                                        <div className="h-full w-44 flex mb-5 bg-red-100 rounded-lg box-border"></div>
+                                        <div className="flex flex-col gap-3">
+                                            <div>
+                                                <label htmlFor="name">
+                                                    Name
+                                                </label>
+                                                <Input
+                                                    size="sm"
+                                                    placeholder="Name"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="stock">
+                                                    Stock
+                                                </label>
+                                                <Input
+                                                    size="sm"
+                                                    placeholder="Stock"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="price">
+                                                    Price
+                                                </label>
+                                                <Input
+                                                    size="sm"
+                                                    placeholder="Price"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
-                </div> */}
+                )}
                 <div className="mt-10 flex gap-5 px-6">
                     <Button>Draft</Button>
                     <Button variance="filled-primary">Submit</Button>
