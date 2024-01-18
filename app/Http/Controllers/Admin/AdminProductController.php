@@ -15,6 +15,6 @@ class AdminProductController extends Controller
 
     public function renderFormInput()
     {
-        return Inertia::render('admin/Product/Add');
+        return Inertia::render('admin/Product/Add/Index');
     }
 }

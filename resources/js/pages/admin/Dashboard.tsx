@@ -1,4 +1,4 @@
-import AdminContainer from "@/components/admin/AdminContainer";
+import AdminContainer from "@/components/modules/admin/AdminContainer";
 import React from "react";
 
 export default function Dashboard() {

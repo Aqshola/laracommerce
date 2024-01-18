@@ -37,6 +37,7 @@ export default function AdminLogin() {
                 <h1 className="text-center text-3xl font-roboto text-neutral font-medium">
                     Admin Login
                 </h1>
+
                 {viewError && <Alert className="mt-5">{errors.user}</Alert>}
 
                 <div className="flex flex-col mt-5 gap-4">

@@ -1,4 +1,4 @@
-import SideNav from "@/components/admin/Sidenav";
+import SideNav from "@/components/modules/admin/Sidenav";
 
 interface Props {
     children: React.ReactNode;

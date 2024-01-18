@@ -8,9 +8,10 @@ import React, {
 } from "react";
 
 const INPUT_SIZE = {
-    sm: "px-4 py-2 rounded-lg text-sm",
-    base: "px-4 py-3 rounded-lg text-sm",
-    lg: "px-4 py-[14px] text-base rounded-lg text-sm",
+    xs: "px-3 py-1 rounded text-xs  placeholder:text-xs",
+    sm: "px-4 py-2 rounded-lg text-sm  placeholder:text-sm",
+    base: "px-4 py-3 rounded-lg text-sm  placeholder:text-sm",
+    lg: "px-4 py-[14px] text-base rounded-lg text-sm  placeholder:text-sm",
 };
 
 const INPUT_VARIANCE = {
@@ -18,7 +19,7 @@ const INPUT_VARIANCE = {
 };
 
 const INPUT_STATE = {
-    default: "placeholder:text-base placeholder:text-gray-500  bg-transparent ",
+    default: " placeholder:text-gray-500  bg-transparent ",
 };
 
 const INPUT_SUPPORT_STATE = {
@@ -84,7 +85,7 @@ function Input(
                     type={initialType}
                     placeholder="Input"
                     className={clsx(
-                        "h-full w-full outline-none border-none ",
+                        "h-full w-full outline-none border-none",
                         INPUT_STATE[state],
                         inputClass
                     )}
