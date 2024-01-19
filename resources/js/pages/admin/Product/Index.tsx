@@ -13,7 +13,8 @@ import {
 import { Link } from "@inertiajs/react";
 import React from "react";
 
-export default function Product() {
+export default function Product({ listProduct }: any) {
+    console.log(listProduct);
     const COLUMN_LIST = [
         {
             increment: true,
@@ -35,13 +36,8 @@ export default function Product() {
         },
         {
             label: "Variant",
-            value: "variant",
-            key: "variant",
-        },
-        {
-            label: "Discount",
-            value: "discount",
-            key: "discount",
+            value: "list_variant",
+            key: "list_variant",
         },
         {
             label: "Action",
@@ -50,15 +46,6 @@ export default function Product() {
         },
     ];
 
-    const ROW_LIST = [
-        {
-            name: "Tanaman Hias",
-            price: 120000,
-            variant: "",
-            discount: "",
-            action: "",
-        },
-    ];
     return (
         <AdminContainer>
             <div className="flex w-full ">
@@ -109,7 +96,7 @@ export default function Product() {
             {/* SECTION TABLE */}
 
             <div className="w-full mt-4">
-                <BuildedTable columnList={COLUMN_LIST} rowList={ROW_LIST} />
+                <BuildedTable columnList={COLUMN_LIST} rowList={listProduct} />
             </div>
         </AdminContainer>
     );
